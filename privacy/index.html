@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Meet Danmakuのチャット処理、設定の保存、問い合わせ情報と公開サイトのデータの取り扱い。"><meta name="color-scheme" content="light">
+<title>プライバシーポリシー｜Meet Danmaku</title><link rel="icon" type="image/png" href="../assets/icon32.png"><link rel="stylesheet" href="../assets/style.css"><link rel="canonical" href="https://mamamaking.github.io/meet-danmaku-site/privacy/"></head>
+<body><a class="skip" href="#main">本文へ移動</a>
+
+<header class="header"><div class="wrap header-inner"><a class="brand" href="../index.html"><img src="../assets/icon128.png" width="40" height="40" alt=""><span>Meet Danmaku</span></a><nav aria-label="メインナビゲーション"><a href="../index.html">紹介・使い方</a><a href="../support/index.html">サポート</a><a href="../privacy/index.html" aria-current="page">プライバシー</a></nav></div></header>
+<main id="main"><section class="page-heading wrap"><p class="eyebrow">PRIVACY</p><h1>プライバシーポリシー</h1><p>拡張機能・お問い合わせ・公開サイトの情報の取り扱い。</p></section><div class="wrap privacy-layout"><aside class="privacy-summary"><h2>大切なこと</h2><p>チャットは端末内で処理。<br>開発者へ自動送信しません。</p><p>お問い合わせは任意。<br>回答内容は公開しません。</p><p>対応完了から1年以内に、<br>問い合わせ情報を削除します。</p><a href="../support/index.html">サポートページへ</a></aside><article class="policy"><p>対象バージョン：0.6.3
+文書更新日：2026-09-21</p>
+<p>Meet Danmaku は、Google Meet のチャットを利用者の画面に弾幕として表示する Chrome 拡張機能です。
+本書は拡張機能自身のデータの取り扱いと、利用者から任意に送信された問い合わせ情報の取り扱いを説明します。Google Meet / Google Chat 自体の取り扱いには、Google のポリシーおよび利用組織の設定が適用されます。</p>
+<h2>処理する情報と目的</h2>
+<p>次の情報を端末内で処理します。</p>
+<ul>
+<li>チャット本文、引用元本文、返信本文：弾幕の表示とNGワードによる表示除外に使用します。</li>
+<li>メッセージID、取得できる投稿時刻、Meet への参加を検出した時刻：重複表示と参加前の履歴を抑制するために使用します。</li>
+<li>ランダムな一時識別子と Chrome が提供するタブ・フレーム情報：同じタブへの転送と再参加の識別に使用します。</li>
+<li>ON/OFF、文字サイズ、流れる速さ、引用方式、登録されたNGワード：利用者が指定した表示設定の保存と適用に使用します。</li>
+<li>件数、処理結果、経過時間、限定された画面構造の情報：不具合の切り分けに使用します。</li>
+</ul>
+<p>発言者名を専用に収集する処理はありません。ただし、チャット本文に人名などが書かれている場合、その内容も本文として処理します。
+元のチャットを匿名化、変更、削除する機能ではありません。</p>
+<h2>保存と保持期間</h2>
+<p>表示設定と登録されたNGワードは <code>chrome.storage.local</code> に保存します。
+保存先は利用者の Chrome プロファイル内です。Chrome の同期ストレージは使用しません。
+設定は変更するまで保持され、拡張機能のアンインストール時に拡張機能のローカル保存データも削除されます。
+NGワードは設定画面で空にして保存することでも解除できます。</p>
+<p>チャット本文・引用本文・投稿時刻は永続保存しません。
+描画、重複判定、転送の再試行に必要な情報はブラウザのメモリ上で一時的に扱い、件数を制限します。
+ページの終了や再読み込みで、そのページの一時情報は失われます。</p>
+<p>中継用 Service Worker の診断集計は最大32タブ分の数値をメモリ上だけに保持し、Worker の停止時に失われます。</p>
+<h2>通信と第三者への提供</h2>
+<p>チャット取得処理は Meet 画面と、最上位ページが Meet である埋め込み Google Chat で動作します。
+埋め込み Google Chat からの本文は、Chrome 拡張内のメッセージ通信と Service Worker を通じて、同じタブの最上位 Meet に端末内で転送します。
+この Service Worker は拡張機能の一部であり、開発者が運営する外部サーバーではありません。</p>
+<p>拡張機能から開発者のサーバーや外部APIへチャット・設定・診断を自動送信する処理はありません。
+広告、アクセス解析、ユーザーデータの販売、広告目的の共有は行いません。
+拡張機能が処理するデータの利用は、本書に記載した機能の提供と、その動作確認に限定します。利用者が任意に送信する問い合わせ情報は、後述の目的と方法で取り扱います。</p>
+<p>Meet Danmaku によるユーザーデータの取り扱いは、<a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" rel="noreferrer">Chrome Web Store User Data Policy の Limited Use 要件</a>に従います。</p>
+<h2>権限とアクセス範囲</h2>
+<ul>
+<li><code>storage</code>：表示設定とNGワードの保存・読み出し・変更反映に使用します。</li>
+<li><code>https://meet.google.com/*</code>：チャットの読み取り、弾幕と操作ボタンの表示に使用します。</li>
+<li><code>https://chat.google.com/*</code>：Meet に埋め込まれた Google Chat のチャット読み取りに使用します。単独の Google Chat 画面や、最上位が Meet 以外の埋め込みではチャット取得を開始しません。</li>
+</ul>
+<h2>任意の診断と問い合わせ</h2>
+<p>利用者が設定画面で「診断を表示」を押すと、直近20件の処理経路、描画要素数、読み取り・中継・再試行などの件数を表示します。
+診断の出力に、コメント本文、発言者名、会議URL、実メッセージID、実際の投稿時刻は含めません。
+一致関係は一時的な番号、時刻は経過時間、画面構造はタグ名と限定された技術属性で表します。</p>
+<p>診断をファイルやストレージへ自動保存したり、外部へ自動送信したりすることはありません。
+問い合わせに診断結果を添付するかどうかは利用者が選択します。
+問い合わせ先へ送る連絡内容は拡張内の自動処理とは別です。会議内容や参加者の氏名など、不要な情報を含めないでください。</p>
+<h2>問い合わせ情報の取り扱い</h2>
+<h3>受付方法と取得する情報</h3>
+<p>お問い合わせは Google フォームで受け付けます。運営者のメールアドレスは問い合わせページに掲載しません。
+返信を希望する場合のみ、返信先メールアドレスを任意の質問欄へ入力してください。メールで返信する際は、返信元の運営者のメールアドレスが相手に表示されます。</p>
+<p>取得する情報は、お問い合わせの種類・内容と、利用者が任意で入力する返信先メールアドレス、拡張機能のバージョン、利用しているチャットの種類などです。
+氏名・会社名・住所・電話番号は受付項目として求めません。
+会議の内容・参加者の個人情報・会社の機密情報・パスワードなどは記入しないでください。不具合の説明には、架空の文章や操作手順を使用してください。</p>
+<p>フォームは Google アカウントにログインせずに回答できる構成とし、Google アカウントのメールアドレスを自動収集する設定は使用しません。
+問い合わせの送信は利用者自身の操作によるもので、拡張機能から Google フォームへチャット・設定・診断を自動送信することはありません。</p>
+<h3>利用目的・保存先・公開範囲</h3>
+<p>問い合わせ情報は、問い合わせへの対応、不具合の調査、機能改善のために利用します。
+回答は Google フォームに保存します。メールで対応した場合は、そのやり取りを Gmail にも保存します。
+Google フォームと Gmail の利用には Google のサービスを使用し、Google による情報の取り扱いには同社のプライバシーポリシーも適用されます。</p>
+<p>回答内容の概要を回答者に表示する設定は使用しません。フォームの編集権限と回答データへのアクセスは運営者に限定し、回答データは一般公開しません。
+保存先としてスプレッドシートを連携する場合も、そのスプレッドシートを一般公開しません。</p>
+<p>Google のプライバシーポリシー：https://policies.google.com/privacy?hl=ja</p>
+<h3>保管期間と削除</h3>
+<p>問い合わせの回答データと対応メールは、対応中に必要な期間保管し、対応完了から1年以内に削除します。
+個別返信を行わない要望や報告については、内容の確認・対応要否の判断が完了した時点を対応完了として扱います。
+自動削除ではなく、運営者が定期的に確認して、Google フォームの回答と Gmail の対応メールを削除します。スプレッドシートなどに複製して保管した場合は、その複製も同じ方針で削除します。</p>
+<p>機能改善のために不具合の概要や要望を記録として残す場合は、返信先メールアドレスおよび個人・会社を特定できる情報を取り除きます。
+問い合わせ情報の削除を希望する場合も、問い合わせフォームからご連絡ください。</p>
+<h2>注意事項</h2>
+<p>画面共有や録画を利用した場合、弾幕がその画面に映る可能性があります。共有する情報は利用者自身で確認してください。
+NGワードは自分の弾幕表示だけを対象とし、元のチャットの保存や他者への表示を制御するものではありません。</p>
+<h2>この公開サイトについて</h2>
+<p>本サイトの公開には GitHub Pages を利用します。サイトには運営者による広告・アクセス解析や、第三者サイトの埋め込みは設置しません。
+GitHub は、GitHub Pages へのアクセス時に、安全性の確保を目的として閲覧者のIPアドレスを記録します。これらのサービス側の記録は、運営者が保存する問い合わせ情報とは異なり、各サービスのポリシーに従って取り扱われます。</p>
+<p><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noreferrer">GitHub のプライバシーステートメント</a></p>
+<p>Google フォームへのリンクを開くと Google のサービスへ移動します。このサイトを閲覧するだけで、問い合わせが送信されることはありません。</p>
+<h2>運営者・問い合わせ先</h2>
+<ul>
+<li>運営者：まままきんぐ（Meet Danmaku 開発者）</li>
+<li>問い合わせ先：<a href="https://docs.google.com/forms/d/e/1FAIpQLScOuouDD73pNhnG6wYrwCSUpx9L0LGqm-hMfcjkXJOTTCpzZA/viewform" rel="noreferrer">お問い合わせフォーム（Google フォーム）</a>（受付準備中）</li>
+</ul></article></div></main>
+<footer><div class="wrap footer-inner"><div><strong>Meet Danmaku</strong><p>運営：まままきんぐ（Meet Danmaku 開発者）</p><p>Google が提供・承認する拡張機能ではありません。</p></div><nav aria-label="フッターナビゲーション"><a href="../index.html">紹介・使い方</a><a href="../support/index.html">サポート</a><a href="../privacy/index.html" aria-current="page">プライバシー</a></nav></div><div class="wrap copyright">© 2026 まままきんぐ</div></footer>
+</body></html>
